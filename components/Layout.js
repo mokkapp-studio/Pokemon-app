@@ -1,11 +1,11 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
+import Header from './Header';
 
 const Layout = props => {
 
     return(
         <>
-            <Navbar/>
+            <Header/>
             <main>
                 {props.children}
             </main>

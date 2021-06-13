@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/Link';
 import Layout from '../components/Layout';
-import Related from '../components/Related/Related';
+import Related from '../components/Recomended/Recomended';
 import { ContentMax } from '../styles/global';
 import {
     WrapperProfile,
@@ -13,15 +13,15 @@ import {
 import { Button } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 
-export default function pokemon({ pokeman }) {
+export default function pokemon({ pokemon }) {
 
 
     return (
         <>
         <Head>
-            <title>Pokemon App | {pokeman.name} Profile</title>
+            <title>Pokemon App | {pokemon.name} Profile</title>
         </Head>
-        <Layout title={pokeman.name}>  
+        <Layout title={pokemon.name}>  
             <ContentMax>
                 <WrapperProfile>
                     <Link href="/">
@@ -30,8 +30,8 @@ export default function pokemon({ pokeman }) {
                         </Button>
                     </Link>
                     <BodyProfile>
-                    <ImgProfile src={pokeman.image} alt={pokeman.name} />
-                    <TitleProfile>{pokeman.name}</TitleProfile>
+                    <ImgProfile src={pokemon.image} alt={pokemon.name} />
+                    <TitleProfile>{pokemon.name}</TitleProfile>
                     </BodyProfile>
                     <Related/>
                 </WrapperProfile>
@@ -45,11 +45,11 @@ export async function getServerSideProps({ query }) {
     const id = query.id;
     try {
         const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-        const pokeman = await res.json();
+        const pokemon = await res.json();
         const paddedId = ('00' + id).slice(-3);
-        pokeman.image = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${paddedId}.png`;
+        pokemon.image = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${paddedId}.png`;
         return {
-            props: { pokeman },
+            props: { pokemon },
         };
     } catch (err) {
         console.error(err);
