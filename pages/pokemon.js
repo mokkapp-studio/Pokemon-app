@@ -3,43 +3,39 @@ import Head from 'next/head';
 import Link from 'next/Link';
 import Layout from '../components/Layout';
 import Related from '../components/Related/Related';
-
+import { ContentMax } from '../styles/global';
+import {
+    WrapperProfile,
+    BodyProfile,
+    ImgProfile,
+    TitleProfile
+} from '../components/UI/Profile/Profile.style';
+import { Button } from 'antd';
+import { ArrowLeftOutlined } from '@ant-design/icons';
 
 export default function pokemon({ pokeman }) {
 
-    // const random = (Math.floor(Math.random() * 25));
-    // const [related, setRelated] = useState({})
-
-    // useEffect(() => {
-    //     axios.get(`https://pokeapi.co/api/v2/pokemon/${random}`)
-    //     .then((res) => {
-    //       setRelated(res.data);
-    //     })
-    //     .catch((err) => {
-    //         console.log(err)
-    //     })
-    // })
 
     return (
         <>
         <Head>
             <title>Pokemon App | {pokeman.name} Profile</title>
         </Head>
-        <Layout title={pokeman.name}>        
-            <img src={pokeman.image} alt={pokeman.name} />
-            <p>
-                <span >Weight:</span> {pokeman.weight}
-            </p>
-            <p>
-                <span >Height:</span>
-                {pokeman.height}
-            </p>
-            <p>
-                <Link href="/">
-                    <a>Home</a>
-                </Link>
-            </p>
-            <Related/>
+        <Layout title={pokeman.name}>  
+            <ContentMax>
+                <WrapperProfile>
+                    <Link href="/">
+                        <Button icon={<ArrowLeftOutlined />}>
+                            Back to List
+                        </Button>
+                    </Link>
+                    <BodyProfile>
+                    <ImgProfile src={pokeman.image} alt={pokeman.name} />
+                    <TitleProfile>{pokeman.name}</TitleProfile>
+                    </BodyProfile>
+                    <Related/>
+                </WrapperProfile>
+            </ContentMax>      
         </Layout>
         </>
     );
